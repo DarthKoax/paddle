@@ -1,58 +1,89 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+// import logo from './logo.svg';
+
+
+
+import React, { Component } from 'react'
+
+import ReactDOM from 'react-dom'
+
+import { connect } from "react-redux"
+import {app_state,add_user_token,remove_user_token} from "./redux/app/actions"
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+
+export const mapDispatchToProps = dispatch =>{
+  return {
+    app_state: (bool) => {
+      dispatch(app_state(bool));
+    },
+    addtoken: (obj) => {
+      dispatch(add_user_token(obj));
+    }, 
+    removetoken: (id) => {
+      dispatch(remove_user_token(id));
+    },
+  };
 }
 
-export default App;
+export const mapStateToProps = store => {
+  return {
+    app: store.app,
+  };
+};
+
+export const tokensObject = (newid,newname,newsecret) => {
+  return {
+    id: newid,
+    name: newname,
+    secret: newsecret
+  }
+}
+
+
+class App extends React.Component {
+
+  constructor() {
+      super();
+  }
+
+
+  componentDidMount() {
+    console.log('--Start App--')
+    console.log(this.props)
+
+    this.props.addtoken(tokensObject(1,"google","aasss334543"))
+    this.props.addtoken(tokensObject(2,"microsoft","sdafadfasfd34"))
+    this.props.addtoken(tokensObject(3,"blipblob","123412341234"))
+
+    this.props.removetoken(1)
+    this.props.removetoken(2)
+
+    console.log(`Actual status ${this.props.app.loaded}`)
+    console.log(`====`)
+    this.props.app_state(true)
+    console.log(`Actual status ${this.props.app.loaded}`)
+    console.log(`====`)
+    
+
+  }
+
+
+
+  render() {
+    
+      /* html div in which leaflet will load */
+      return (
+        <div className="App">
+          <header className="App-header">
+            Hello world
+          </header>
+        </div>
+
+      )
+  }
+
+};
+
+// export default App
+export default connect(mapStateToProps, mapDispatchToProps)(App);
