@@ -12,6 +12,12 @@ export const remove_user_token = (id) => async dispatch => {
   dispatch(mutation.RemoveUserTokens(id))
 };
 
+export const set_token_update = (id,code) => async dispatch => {
+  dispatch(mutation.UpdateTokenDate(id,code))
+};
+
+
+
 
 // //#########################---LOADED---############################################
 // export const setLoaded = () => dispatch => {

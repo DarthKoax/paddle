@@ -13,10 +13,17 @@
     data
   })
   
+  const UpdateTokenDate = (id,code) => ({
+    type: "UPDATE_DATE_TOKEN",
+    id,
+    code
+  })
+  
 
   
     export const mutation = {
       SetAppState, 
       SetUserTokens,
-      RemoveUserTokens 
+      RemoveUserTokens,
+      UpdateTokenDate 
     };

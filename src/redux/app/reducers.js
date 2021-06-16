@@ -44,6 +44,27 @@ export default (state = initialState, action) => {
             tokens: state.tokens
         });
     }
+    case "UPDATE_DATE_TOKEN": {
+        // console.log(`UPDATE_DATE_TOKEN data ${action}`)
+        let tokens = state.tokens;
+        let index = -1; 
+        tokens.forEach(x=>{
+            if(x.id === action.id){
+                index = tokens.indexOf(x);
+            }            
+        })
+
+        if (index > -1) {
+            tokens[index].code = action.code;
+        }
+
+
+        state.tokens = tokens;
+        
+        return Object.assign({}, state, {
+            tokens: state.tokens
+        });
+    }
     
     default:
       return state;
