@@ -16,10 +16,15 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+
 import Paper from '@material-ui/core/Paper';
 import Drawer from '@material-ui/core/Drawer';
 
+import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import InfoIcon from '@material-ui/icons/Info';
 
 import './App.css';
 
@@ -109,19 +114,24 @@ class App extends React.Component {
       <div className="App">
         <React.Fragment key="left">
           <AppBar position="static">
-            <Toolbar variant="dense">
+            <Toolbar variant="dense" onClick={this.toggleDrawer(true)}>
               <IconButton edge="start" className="menubarIcon" color="inherit" aria-label="menu" onClick={this.toggleDrawer(true)}>
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" color="inherit" onClick={() => { this.props.app_state("HOME") }}>
+              <Typography variant="h6" color="inherit">
                 Paddle
               </Typography>
             </Toolbar>
           </AppBar>
           <Drawer anchor="left" open={this.menuOpen} onClose={this.toggleDrawer(false)}>
-            <Button color="primary" onClick={() => { this.props.app_state("HOME") }}>HOME</Button>
-            <Button varient="contained" color="primary" onClick={() => { this.props.app_state("NEW") }}>Add New</Button>
+            <Button color="primary" onClick={() => { this.props.app_state("HOME") }}> <HomeIcon /> Home </Button>
+            <Button color="primary" onClick={() => { this.props.app_state("NEW") }}> <AddCircleIcon /> Add New </Button>
+            <Button color="primary" onClick={() => { this.props.app_state("DOWNLOAD") }}> <CloudDownloadIcon /> Backup </Button>
+            <Button color="primary" onClick={() => { this.props.app_state("ABOUT") }}> <InfoIcon /> About </Button>
           </Drawer>
+
+          
+
         </React.Fragment>
 
         <div className="appBody">
@@ -135,7 +145,7 @@ class App extends React.Component {
           )}
 
 
-          {this.props.appstate && this.props.appstate == "home" && this.props.tokens && this.props.tokens[0] && (
+          {this.props.appstate && this.props.appstate == "home" && this.props.tokens && this.props.tokens.length > 0 && (
             <div className="tokensList">
               {tokens}
             </div>
@@ -145,18 +155,26 @@ class App extends React.Component {
             <div>
               <h2>You currently have no tokens set. Click Add New to get started</h2>
               <div>
-                <Button varient="contained" color="primary" onClick={() => { this.props.app_state("NEW") }}>Add New</Button>
+                <Button varient="contained" color="primary" onClick={() => { this.props.app_state("NEW") }}> <AddCircleIcon /> Add New</Button>
+              </div>
+            </div>
+          )}
+
+          {this.props.appstate && this.props.appstate == "ERROR" && (
+            <div>
+              <h2>Opps😭</h2>
+              <p>
+                An error occured. In all likelyhood you did nothing wrong. 
+                The option you selected likely just doesnt exist yet. 
+                Please try again later.
+              </p>
+              <div>
+              <Button color="primary" onClick={() => { this.props.app_state("HOME") }}> <HomeIcon /> Home </Button>
               </div>
             </div>
           )}
 
         </div>
-
-        {/* <Token id={1}
-                updated={1623808589430}
-                secret={"sadfasdfasdf"}
-                   /> */}
-
       </div>
 
     )

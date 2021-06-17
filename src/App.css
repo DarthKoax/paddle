@@ -19,7 +19,7 @@
 div.MuiDrawer-root div.MuiDrawer-paper {
   left: 25vw;
   right: auto;
-  height: 50vh;
+  height: auto;
   width: 50vw;
   top: 25%;
 }

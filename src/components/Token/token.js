@@ -61,6 +61,8 @@ class Token extends React.Component {
     this.totp = new window.jsOTP.totp();
     this.code = this.totp.getOtp(this.props.secret);
 
+    console.log(this.totp);
+
     this.props.update_token(this.props.id, this.code);
 
     this.timer = setInterval(() => {
