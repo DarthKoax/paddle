@@ -1,6 +1,64 @@
-/* .App {
+.App {
   text-align: center;
 }
+
+.appBody {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.tokensList {
+  width: 25vw;
+}
+
+.MuiTypography-root {
+  cursor: pointer;
+}
+
+div.MuiDrawer-root div.MuiDrawer-paper {
+  left: 25vw;
+  right: auto;
+  height: 50vh;
+  width: 50vw;
+  top: 25%;
+}
+
+.card {
+  margin: 10px 0px;
+}
+
+.tokenCard {
+  display: flex;
+  flex-direction: row;
+}
+
+.tokenDetails {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.tokenDetails h2{
+  margin: 10px;
+}
+
+.tokenFunctions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+}
+
+.deleteMessage{
+  background-color: grey;
+  border-radius: 5px;
+  color: antiquewhite;
+}
+
+/* 
+
+
 
 .App-logo {
   height: 40vmin;
